@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import {
   Autocomplete,
   Button,
+  Paper,
   Stack,
   TextField,
   Typography,
@@ -49,58 +50,63 @@ function ParkVehicleForm() {
   return (
     <>
       <form onSubmit={onSubmit}>
-        <Stack spacing="2em" alignItems="center" mt="2em">
-          <TextField
-            value={plateNo}
-            onChange={(e) => setPlateNo(e.target.value)}
-            label="Plate No."
-            size="small"
-            required
-          />
+        <Paper
+          elevation={4}
+          sx={{ width: 'fit-content', p: '2em', mt: '2em', mx: 'auto' }}
+        >
+          <Stack spacing="2em" alignItems="center">
+            <TextField
+              value={plateNo}
+              onChange={(e) => setPlateNo(e.target.value)}
+              label="Plate No."
+              size="small"
+              required
+            />
 
-          <Autocomplete
-            value={size}
-            options={sizeOptions}
-            onChange={(_, newValue) => setSize(newValue)}
-            sx={{ width: 250 }}
-            renderInput={(params) => (
-              <TextField
-                {...params} // eslint-disable-line
-                label="Vehicle Size"
-                size="small"
-                required
-              />
-            )}
-          />
+            <Autocomplete
+              value={size}
+              options={sizeOptions}
+              onChange={(_, newValue) => setSize(newValue)}
+              sx={{ width: 250 }}
+              renderInput={(params) => (
+                <TextField
+                  {...params} // eslint-disable-line
+                  label="Vehicle Size"
+                  size="small"
+                  required
+                />
+              )}
+            />
 
-          <Autocomplete
-            value={parkEntrance}
-            options={parkEntranceOptions}
-            onChange={(_, newValue) => setParkEntrance(newValue)}
-            sx={{ width: 250 }}
-            renderInput={(params) => (
-              <TextField
-                {...params} // eslint-disable-line
-                label="Parking Entrance"
-                size="small"
-                required
-              />
-            )}
-          />
+            <Autocomplete
+              value={parkEntrance}
+              options={parkEntranceOptions}
+              onChange={(_, newValue) => setParkEntrance(newValue)}
+              sx={{ width: 250 }}
+              renderInput={(params) => (
+                <TextField
+                  {...params} // eslint-disable-line
+                  label="Parking Entrance"
+                  size="small"
+                  required
+                />
+              )}
+            />
 
-          <Stack spacing="0.5em" alignItems="center">
-            <Button variant="contained" type="submit">
-              Park Vehicle
-            </Button>
+            <Stack spacing="0.5em" alignItems="center">
+              <Button variant="contained" type="submit">
+                Park Vehicle
+              </Button>
 
-            {errMessage && (
-              <Typography color="red" fontWeight="bold">
-                {errMessage}
-              </Typography>
-            )}
-            {!errMessage && <>&nbsp;</>}
+              {errMessage && (
+                <Typography color="red" fontWeight="bold">
+                  {errMessage}
+                </Typography>
+              )}
+              {!errMessage && <>&nbsp;</>}
+            </Stack>
           </Stack>
-        </Stack>
+        </Paper>
       </form>
 
       {openDialog && <DialogPark setOpen={setOpenDialog} data={dialogData} />}
