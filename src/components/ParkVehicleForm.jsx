@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Autocomplete, Button, Stack, TextField } from '@mui/material';
+import {
+  Autocomplete,
+  Button,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 import usePrepareParkData from '../helpers/usePrepareParkData';
 import { park } from '../redux/parkingSpotsSlice';
@@ -10,6 +16,7 @@ import DialogPark from './DialogPark';
 function ParkVehicleForm() {
   const dispatch = useDispatch();
   const prepareParkData = usePrepareParkData();
+  const [errMessage, setErrMessage] = useState('');
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogData, setDialogData] = useState({});
   const [plateNo, setPlateNo] = useState('');
@@ -20,15 +27,23 @@ function ParkVehicleForm() {
     e.preventDefault();
     const sizeId = size.id;
     const parkEntranceId = parkEntrance.id;
-    const data = prepareParkData({ plateNo, sizeId, parkEntranceId });
 
+    let data;
+    try {
+      data = prepareParkData({ plateNo, sizeId, parkEntranceId });
+    } catch (err) {
+      setErrMessage(err.message);
+      return;
+    }
     dispatch(park(data));
+
     setDialogData(data);
     setOpenDialog(true);
 
     setPlateNo('');
     setSize(null);
     setParkEntrance(null);
+    setErrMessage('');
   };
 
   return (
@@ -73,9 +88,18 @@ function ParkVehicleForm() {
             )}
           />
 
-          <Button variant="contained" type="submit">
-            Park Vehicle
-          </Button>
+          <Stack spacing="0.5em" alignItems="center">
+            <Button variant="contained" type="submit">
+              Park Vehicle
+            </Button>
+
+            {errMessage && (
+              <Typography color="red" fontWeight="bold">
+                {errMessage}
+              </Typography>
+            )}
+            {!errMessage && <>&nbsp;</>}
+          </Stack>
         </Stack>
       </form>
 

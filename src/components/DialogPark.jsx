@@ -102,9 +102,6 @@ DialogPark.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.number.isRequired,
     startTime: PropTypes.string.isRequired,
-    endTime: PropTypes.string.isRequired,
-    amount: PropTypes.number.isRequired,
-    totalAmountPaid: PropTypes.number.isRequired,
   }).isRequired,
 };
 
