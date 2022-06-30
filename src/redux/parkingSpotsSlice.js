@@ -26,8 +26,8 @@ const initialState = (() => {
     startTime: null,
     endTime: null,
     distances: [],
+    amountPaid: 0,
     isActive: false, // if the parking spot is occupied
-    isContinous: false, // if vehicle came back within one hour after leaving
   }));
 
   output = addDistanceFromParkEntrance(output); // for parking entrance 1

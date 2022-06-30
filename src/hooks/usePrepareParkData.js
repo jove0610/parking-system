@@ -7,8 +7,8 @@ const usePrepareParkData = () => {
   const parkingSpots = useSelector(getParkingSpots);
 
   const prepareParkData = ({ plateNo, sizeId, parkEntranceId }) => {
-    const startTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
-    let isContinous = false;
+    let startTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    let amountPaid = 0;
 
     // check if vehicle is already parked
     const currentVehicleSpot = parkingSpots.find(
@@ -19,13 +19,15 @@ const usePrepareParkData = () => {
     }
 
     // check if vehicle came back within one hour after leaving
+    // if true, then keep the old amountPaid and startTime
     const oldData = parkingSpots.find(
       (pSpot) =>
         pSpot.plateNo === plateNo &&
-        dayjs(startTime).diff(dayjs(pSpot.startTime), 'hour', true) <= 1
+        dayjs(startTime).diff(dayjs(pSpot.endTime), 'hour', true) <= 1
     );
     if (oldData !== undefined) {
-      isContinous = true;
+      startTime = oldData.startTime;
+      amountPaid = oldData.amountPaid;
     }
 
     // filter the parking spots by size and isActive
@@ -48,7 +50,7 @@ const usePrepareParkData = () => {
       startTime,
       endTime: null,
       isActive: true,
-      isContinous,
+      amountPaid,
     };
   };
 
