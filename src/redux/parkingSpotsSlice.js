@@ -40,9 +40,20 @@ const initialState = (() => {
 const parkingSpotsSlice = createSlice({
   name: 'parkingSpots',
   initialState,
-  reducers: {},
+  reducers: {
+    park: (state, action) => {
+      const { payload } = action;
+      const parkingSpot = state.find((pSpot) => pSpot.id === payload.id);
+      parkingSpot.plateNo = payload.plateNo;
+      parkingSpot.startTime = payload.startTime;
+      parkingSpot.endTime = payload.endTime;
+      parkingSpot.isActive = payload.isActive;
+      parkingSpot.isContinous = payload.isContinous;
+    },
+  },
 });
 
 export default parkingSpotsSlice.reducer;
 
+export const { park } = parkingSpotsSlice.actions;
 export const getParkingSpots = (state) => state.parkingSpots;

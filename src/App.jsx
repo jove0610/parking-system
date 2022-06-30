@@ -1,15 +1,13 @@
 import React from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
-import { Box, Typography } from '@mui/material';
 
 import store from './redux/store';
+import ParkVehicleForm from './components/ParkVehicleForm';
 
 function App() {
   return (
     <ReduxProvider store={store}>
-      <Box>
-        <Typography variant="h2">Hello World</Typography>
-      </Box>
+      <ParkVehicleForm />
     </ReduxProvider>
   );
 }
