@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Autocomplete, Button, Stack, TextField } from '@mui/material';
 
-import usePrepareParkData from '../hooks/usePrepareParkData';
+import usePrepareParkData from '../helpers/usePrepareParkData';
 import { park } from '../redux/parkingSpotsSlice';
 import { parkEntranceOptions, sizeOptions } from '../constants';
 
