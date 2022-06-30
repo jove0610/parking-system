@@ -26,7 +26,7 @@ const initialState = (() => {
     startTime: null,
     endTime: null,
     distances: [],
-    amountPaid: 0,
+    totalAmountPaid: 0,
     isActive: false, // if the parking spot is occupied
   }));
 
@@ -50,10 +50,17 @@ const parkingSpotsSlice = createSlice({
       parkingSpot.isActive = payload.isActive;
       parkingSpot.isContinous = payload.isContinous;
     },
+    unpark: (state, action) => {
+      const { payload } = action;
+      const parkingSpot = state.find((pSpot) => pSpot.id === payload.id);
+      parkingSpot.endTime = payload.endTime;
+      parkingSpot.totalAmountPaid = payload.totalAmountPaid;
+      parkingSpot.isActive = payload.isActive;
+    },
   },
 });
 
 export default parkingSpotsSlice.reducer;
 
-export const { park } = parkingSpotsSlice.actions;
+export const { park, unpark } = parkingSpotsSlice.actions;
 export const getParkingSpots = (state) => state.parkingSpots;
