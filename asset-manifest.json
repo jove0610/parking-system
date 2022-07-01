@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/parking-system/static/js/main.1c480af9.js",
+    "main.js": "/parking-system/static/js/main.722ea8d7.js",
     "index.html": "/parking-system/index.html",
-    "main.1c480af9.js.map": "/parking-system/static/js/main.1c480af9.js.map"
+    "main.722ea8d7.js.map": "/parking-system/static/js/main.722ea8d7.js.map"
   },
   "entrypoints": [
-    "static/js/main.1c480af9.js"
+    "static/js/main.722ea8d7.js"
   ]
 }
