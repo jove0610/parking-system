@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
 
 import { IconButton, Tooltip } from '@mui/material';
-import { red } from '@mui/material/colors';
+import { grey, red } from '@mui/material/colors';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import HelpIcon from '@mui/icons-material/Help';
 
 import { getParkingEntrance } from '../../redux/parkingEntranceSlice';
 import { getParkingSpots, unpark } from '../../redux/parkingSpotsSlice';
@@ -100,6 +101,15 @@ function ParkingSpotsTable() {
         field: String(item.id),
         headerName: item.label,
         flex: 1,
+        renderCell: (params) => (
+          <>
+            <Tooltip title="Distance from the entrance." arrow>
+              <HelpIcon sx={{ color: grey[500], fontSize: '1.3rem' }} />
+            </Tooltip>
+            &nbsp; &nbsp;
+            {params.value}
+          </>
+        ),
       });
     });
 
