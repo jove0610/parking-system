@@ -17,7 +17,8 @@ import Paper from '@mui/material/Paper';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 import { getParkingSpots, unpark } from '../../redux/parkingSpotsSlice';
-import { parkEntranceOptions, sizeOptions } from '../../constants';
+import { getParkingEntrance } from '../../redux/parkingEntranceSlice';
+import { sizeOptions } from '../../constants';
 import prepareUnparkData from '../../helpers/prepareUnparkData';
 
 import StyledTableCell from '../StyledTableCell';
@@ -27,6 +28,7 @@ import TablePaginationActions from './TablePaginationActions';
 
 function ParkingSpotsTable() {
   const dispatch = useDispatch();
+  const parkingEntrance = useSelector(getParkingEntrance);
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogData, setDialogData] = useState({});
   const parkingSpots = useSelector(getParkingSpots);
@@ -73,13 +75,13 @@ function ParkingSpotsTable() {
               <StyledTableCell rowSpan={2}>Parking Size</StyledTableCell>
               <StyledTableCell rowSpan={2}>Plate No.</StyledTableCell>
               <StyledTableCell rowSpan={2}>Start Time</StyledTableCell>
-              <StyledTableCell colSpan={3} align="center">
+              <StyledTableCell colSpan={parkingEntrance.length} align="center">
                 Distance from
               </StyledTableCell>
             </StyledTableRow>
 
             <StyledTableRow>
-              {parkEntranceOptions.map((option) => (
+              {parkingEntrance.map((option) => (
                 <StyledTableCell key={nanoid()} align="right">
                   {option.label}
                 </StyledTableCell>

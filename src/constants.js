@@ -1,8 +1,4 @@
-export const parkEntranceOptions = [
-  { id: 0, label: 'Emerald' },
-  { id: 1, label: 'Ruby' },
-  { id: 2, label: 'Pearl' },
-];
+/* eslint-disable import/prefer-default-export */
 
 export const sizeOptions = [
   { id: 0, label: 'Small' },

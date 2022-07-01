@@ -57,10 +57,14 @@ const parkingSpotsSlice = createSlice({
       parkingSpot.totalAmountPaid = payload.totalAmountPaid;
       parkingSpot.isActive = payload.isActive;
     },
+    addEntrance: (state) => {
+      const output = addDistanceFromParkEntrance(state);
+      state = output; // eslint-disable-line
+    },
   },
 });
 
 export default parkingSpotsSlice.reducer;
 
-export const { park, unpark } = parkingSpotsSlice.actions;
+export const { park, unpark, addEntrance } = parkingSpotsSlice.actions;
 export const getParkingSpots = (state) => state.parkingSpots;

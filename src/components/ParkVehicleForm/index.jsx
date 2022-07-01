@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Autocomplete,
   Button,
@@ -9,14 +9,16 @@ import {
   Typography,
 } from '@mui/material';
 
-import usePrepareParkData from '../helpers/usePrepareParkData';
-import { park } from '../redux/parkingSpotsSlice';
-import { parkEntranceOptions, sizeOptions } from '../constants';
+import usePrepareParkData from '../../helpers/usePrepareParkData';
+import { park } from '../../redux/parkingSpotsSlice';
+import { getParkingEntrance } from '../../redux/parkingEntranceSlice';
+import { sizeOptions } from '../../constants';
 import DialogPark from './DialogPark';
 
 function ParkVehicleForm() {
   const dispatch = useDispatch();
   const prepareParkData = usePrepareParkData();
+  const parkingEntrance = useSelector(getParkingEntrance);
   const [errMessage, setErrMessage] = useState('');
   const [openDialog, setOpenDialog] = useState(false);
   const [dialogData, setDialogData] = useState({});
@@ -80,7 +82,7 @@ function ParkVehicleForm() {
 
             <Autocomplete
               value={parkEntrance}
-              options={parkEntranceOptions}
+              options={parkingEntrance}
               onChange={(_, newValue) => setParkEntrance(newValue)}
               sx={{ width: 250 }}
               renderInput={(params) => (
