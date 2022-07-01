@@ -49,6 +49,7 @@ const parkingSpotsSlice = createSlice({
       parkingSpot.endTime = payload.endTime;
       parkingSpot.isActive = payload.isActive;
       parkingSpot.isContinous = payload.isContinous;
+      parkingSpot.totalAmountPaid = payload.totalAmountPaid;
     },
     unpark: (state, action) => {
       const { payload } = action;

@@ -20,14 +20,17 @@ const usePrepareParkData = () => {
 
     // check if vehicle came back within one hour after leaving
     // if true, then keep the totalAmountPaid and startTime
-    const oldData = parkingSpots.find(
+    const oldData = parkingSpots.filter(
       (pSpot) =>
         pSpot.plateNo === plateNo &&
         dayjs(startTime).diff(dayjs(pSpot.endTime), 'hour', true) <= 1
     );
-    if (oldData !== undefined) {
-      startTime = oldData.startTime;
-      totalAmountPaid = oldData.totalAmountPaid;
+    if (oldData.length !== 0) {
+      const [sortedOldData] = oldData.sort(
+        (a, b) => dayjs(b.endTime) - dayjs(a.endTime)
+      );
+      startTime = sortedOldData.startTime;
+      totalAmountPaid = sortedOldData.totalAmountPaid;
     }
 
     // filter the parking spots by size and isActive
