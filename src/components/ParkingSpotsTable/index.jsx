@@ -71,7 +71,7 @@ function ParkingSpotsTable() {
       {
         field: 'action',
         headerName: 'Action',
-        width: 70,
+        minWidth: 70,
         flex: 0.5,
         sortable: false,
         renderCell: (params) => (
@@ -90,16 +90,17 @@ function ParkingSpotsTable() {
           </>
         ),
       },
-      { field: 'id', headerName: 'Parking No.', flex: 1 },
-      { field: 'parkSize', headerName: 'Parking Size', flex: 1 },
-      { field: 'plateNo', headerName: 'Plate No.', flex: 1 },
-      { field: 'startTime', headerName: 'Start Time', flex: 2 },
+      { field: 'id', headerName: 'Parking No.', minWidth: 120, flex: 1 },
+      { field: 'parkSize', headerName: 'Parking Size', minWidth: 120, flex: 1 },
+      { field: 'plateNo', headerName: 'Plate No.', minWidth: 120, flex: 1 },
+      { field: 'startTime', headerName: 'Start Time', minWidth: 150, flex: 2 },
     ];
 
     parkingEntrance.forEach((item) => {
       output.push({
         field: String(item.id),
         headerName: item.label,
+        minWidth: 150,
         flex: 1,
         renderCell: (params) => (
           <>
@@ -117,7 +118,7 @@ function ParkingSpotsTable() {
   })();
 
   return (
-    <div style={{ maxWidth: '90vw' }}>
+    <div style={{ maxWidth: '90vw', overflowX: 'auto' }}>
       <DataGrid
         rows={rows}
         columns={columns}
